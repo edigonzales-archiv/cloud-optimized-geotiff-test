@@ -33,6 +33,8 @@ List<S3ObjectSummary> objects = result.getObjectSummaries()
 for (S3ObjectSummary os : objects) {
     System.out.println("* " + os.getKey())
     if (os.getKey()[-3..-1] == "tif") {
+
+        s3Client.setObjectAcl("geotiff-cloud", os.getKey(), CannedAccessControlList.PublicRead)
         input_file_list << "/vsicurl/http://geotiff-cloud.s3-website.eu-central-1.amazonaws.com/" + os.getKey() + "\n"
     }
 
